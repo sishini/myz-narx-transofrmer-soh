@@ -64,27 +64,33 @@ os.makedirs('models', exist_ok=True)
 model.train()
 t_range = trange(EPOCHS)
 for epoch in t_range:
+    
     train_losses = []
-    for inputs, outputs in train_dataloader:
+    for inputs, outputs in train_dataloader: # train_dataloader, train setinden verileri yükler.
         inputs = inputs.float().to(device)
         outputs = outputs.float().to(device)
-        predicted_outputs = model.pred_sequence(inputs, outputs)
 
-        optimizer.zero_grad()
-        loss = criterion(predicted_outputs[:,NUM_CYCLES-1:], outputs[:,NUM_CYCLES-1:])
-        loss.backward()
-        optimizer.step()
-        train_losses.append(loss.item())
+        predicted_outputs = model.pred_sequence(inputs, outputs) #model.pred_sequence fonksiyonu şurda tanımlanmıştır: Çok-adımlı (multi-step) tahmin üretir: her adımda `forward` çağrılır ve elde edilen tahminler kapasite geçmişine eklenir.
+        #Modelin ileri besleme (forward pass) adımıdır. inputs ve geçmiş outputs değerlerini alarak bir tahmin dizisi üretir.
+        
+        optimizer.zero_grad() #Bir önceki adımdan kalan gradyanları (türevleri) sıfırlar. PyTorch gradyanları biriktirdiği için bu adım hayati önem taşır; aksi takdirde model yanlış yöne sapar.
+        loss = criterion(predicted_outputs[:,NUM_CYCLES-1:], outputs[:,NUM_CYCLES-1:]) #Hata payını hesaplar. L1Loss, tahmin edilen çıktılar ile gerçek çıktılar arasındaki mutlak farkın ortalamasını hesaplar.
+        loss.backward() #Hata payının gradyanlarını hesaplar. PyTorch'un otomatik gradyan hesaplamasını kullanarak, loss fonksiyonunun türevini hesaplar ve modelin parametrelerini güncellemek için kullanılır.
+        optimizer.step() #Modelin parametrelerini günceller. optimizer.step() fonksiyonu, gradyan inişi (gradient descent) algoritmasını uygular ve modelin parametrelerini günceller. Bu adım, modelin performansını artırmak için kritik bir adımdır.
+        train_losses.append(loss.item()) #Hata payını kaydeder. loss.item() fonksiyonu, loss değerini bir Python float olarak döndürür ve bu değeri train_losses listesine ekler. Bu liste, her epoch'ta tüm batch'lerin kaybının ortalamasını tutar.
 
     test_losses = []
-    for inputs, outputs in test_dataloader:
+    for inputs, outputs in test_dataloader: # test_dataloader, test setinden verileri yükler.
         inputs = inputs.float().to(device)
         outputs = outputs.float().to(device)
-        with torch.no_grad():
-            predicted_outputs = model.pred_sequence(inputs, outputs)
-            test_loss = criterion(predicted_outputs[:,NUM_CYCLES-1:], outputs[:,NUM_CYCLES-1:])
-            test_losses.append(test_loss.item())
-    Loss_log.append([np.mean(train_losses),np.mean(test_losses)])
+
+        with torch.no_grad(): #PyTorch'un gradyan hesaplamasını devre dışı bırakır. Bu, test sırasında performansı artırır ve gereksiz bellek kullanımını önler.
+            predicted_outputs = model.pred_sequence(inputs, outputs) 
+            #Modelin ileri besleme (forward pass) adımıdır. inputs ve geçmiş outputs değerlerini alarak bir tahmin dizisi üretir.
+            
+            test_loss = criterion(predicted_outputs[:,NUM_CYCLES-1:], outputs[:,NUM_CYCLES-1:]) #Hata payını hesaplar. L1Loss, tahmin edilen çıktılar ile gerçek çıktılar arasındaki mutlak farkın ortalamasını hesaplar.
+            test_losses.append(test_loss.item()) #Hata payını kaydeder. loss.item() fonksiyonu, loss değerini bir Python float olarak döndürür ve bu değeri test_losses listesine ekler. Bu liste, her epoch'ta tüm batch'lerin kaybının ortalamasını tutar.
+    Loss_log.append([np.mean(train_losses),np.mean(test_losses)]) #Her epoch'ta train ve test kayıplarını kaydeder. Loss_log listesine her epoch'ta train ve test kayıplarının ortalamasını ekler. Bu liste, her epoch'ta train ve test kayıplarının ortalamasını tutar.
 
     #Epoch ilerlemesini göstermek için tqdm kullanarak eğitim ve test kayıplarını güncelleyin. tqdm, uzun süren işlemler sırasında ilerleme çubuğu göstererek kullanıcıya bilgi verir.
     t_range.set_description(f"train loss: {np.mean(train_losses)}, test loss: {np.mean(test_losses)}")

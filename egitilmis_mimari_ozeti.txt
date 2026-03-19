@@ -1,0 +1,46 @@
+--- EĞİTİLMİŞ MODELİN MİMARİSİ (KATEGORİZE EDİLMİŞ) ---
+
+=======================================================
+1. BACKBONE (Özellik Çıkarımı: Evrişim Katmanları)
+=======================================================
+  (conv_layer): Conv2d(7, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  (conv_layer2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1))
+
+=======================================================
+2. NECK (Zaman/Sıra İlişkilendirmesi: Transformer Katmanları)
+=======================================================
+  (encoder_layer): TransformerEncoderLayer(
+  (self_attn): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=16, out_features=16, bias=True)
+  )
+  (linear1): Linear(in_features=16, out_features=2048, bias=True)
+  (dropout): Dropout(p=0.1, inplace=False)
+  (linear2): Linear(in_features=2048, out_features=16, bias=True)
+  (norm1): LayerNorm((16,), eps=1e-05, elementwise_affine=True)
+  (norm2): LayerNorm((16,), eps=1e-05, elementwise_affine=True)
+  (dropout1): Dropout(p=0.1, inplace=False)
+  (dropout2): Dropout(p=0.1, inplace=False)
+)
+  (decoder_layer): TransformerDecoderLayer(
+  (self_attn): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=16, out_features=16, bias=True)
+  )
+  (multihead_attn): MultiheadAttention(
+    (out_proj): NonDynamicallyQuantizableLinear(in_features=16, out_features=16, bias=True)
+  )
+  (linear1): Linear(in_features=16, out_features=2048, bias=True)
+  (dropout): Dropout(p=0.1, inplace=False)
+  (linear2): Linear(in_features=2048, out_features=16, bias=True)
+  (norm1): LayerNorm((16,), eps=1e-05, elementwise_affine=True)
+  (norm2): LayerNorm((16,), eps=1e-05, elementwise_affine=True)
+  (norm3): LayerNorm((16,), eps=1e-05, elementwise_affine=True)
+  (dropout1): Dropout(p=0.1, inplace=False)
+  (dropout2): Dropout(p=0.1, inplace=False)
+  (dropout3): Dropout(p=0.1, inplace=False)
+)
+
+=======================================================
+3. HEAD (Sonuç/Tahmin Üretimi: Doğrusal Katmanlar)
+=======================================================
+  (cap_linear_layer): Linear(in_features=6, out_features=16, bias=True)
+  (final_linear_layer): Linear(in_features=16, out_features=1, bias=True)

@@ -1,0 +1,168 @@
+--- EĞİTİLMİŞ MODELİN AĞIRLIKLARI (ÖZET) ---
+
+=======================================================
+1. BACKBONE (Özellik Çıkarımı: Evrişim Katmanları)
+=======================================================
+
+Katman: conv_layer.weight | Boyut: torch.Size([16, 7, 3, 3])
+Ortalama: 0.001061
+İlk 5 Değer: [-0.076738, -0.230755, 0.031758, -0.174818, -0.206573]
+
+Katman: conv_layer.bias | Boyut: torch.Size([16])
+Ortalama: 0.001858
+İlk 5 Değer: [0.017005, 0.064172, 0.041914, -0.091881, -0.012528]
+
+Katman: conv_layer2.weight | Boyut: torch.Size([16, 16, 3, 3])
+Ortalama: -0.000473
+İlk 5 Değer: [-0.098589, 0.16979, -0.301343, -0.191024, 0.140208]
+
+Katman: conv_layer2.bias | Boyut: torch.Size([16])
+Ortalama: -0.025205
+İlk 5 Değer: [0.022482, 0.054844, -0.095309, -0.043059, -0.108934]
+
+=======================================================
+2. NECK (Zaman/Sıra İlişkilendirmesi: Transformer Katmanları)
+=======================================================
+
+Katman: cap_linear_layer.weight | Boyut: torch.Size([16, 6])
+Ortalama: 0.011491
+İlk 5 Değer: [0.193864, -0.412462, 0.218105, 0.038051, 0.042279]
+
+Katman: cap_linear_layer.bias | Boyut: torch.Size([16])
+Ortalama: -0.026403
+İlk 5 Değer: [-0.098952, -0.400378, -0.386629, -0.291223, -0.183803]
+
+Katman: encoder_layer.self_attn.in_proj_weight | Boyut: torch.Size([48, 16])
+Ortalama: -0.002720
+İlk 5 Değer: [0.032082, -0.133908, -0.329947, 0.111118, -0.303905]
+
+Katman: encoder_layer.self_attn.in_proj_bias | Boyut: torch.Size([48])
+Ortalama: -0.005815
+İlk 5 Değer: [-0.2475, 0.039153, -0.067844, -0.225943, -0.101957]
+
+Katman: encoder_layer.self_attn.out_proj.weight | Boyut: torch.Size([16, 16])
+Ortalama: 0.008698
+İlk 5 Değer: [-0.162882, 0.031915, -0.033882, -0.125412, 0.031011]
+
+Katman: encoder_layer.self_attn.out_proj.bias | Boyut: torch.Size([16])
+Ortalama: 0.000213
+İlk 5 Değer: [-0.030935, -0.020873, -0.012017, 0.064982, 0.038631]
+
+Katman: encoder_layer.linear1.weight | Boyut: torch.Size([2048, 16])
+Ortalama: -0.005266
+İlk 5 Değer: [-0.125345, 0.239862, -0.101409, 0.112885, -0.030187]
+
+Katman: encoder_layer.linear1.bias | Boyut: torch.Size([2048])
+Ortalama: -0.133924
+İlk 5 Değer: [0.08876, -0.253037, 0.005008, -0.037784, -0.280942]
+
+Katman: encoder_layer.linear2.weight | Boyut: torch.Size([16, 2048])
+Ortalama: 0.001446
+İlk 5 Değer: [0.148358, -0.06171, -0.005221, 0.065736, -0.098949]
+
+Katman: encoder_layer.linear2.bias | Boyut: torch.Size([16])
+Ortalama: -0.000642
+İlk 5 Değer: [-0.019022, -0.032854, 0.062123, -0.044718, -0.000349]
+
+Katman: encoder_layer.norm1.weight | Boyut: torch.Size([16])
+Ortalama: 0.981772
+İlk 5 Değer: [1.040433, 0.945175, 0.953485, 0.955195, 0.928039]
+
+Katman: encoder_layer.norm1.bias | Boyut: torch.Size([16])
+Ortalama: 0.001865
+İlk 5 Değer: [0.028406, -0.048873, 0.030931, -0.10666, 0.007452]
+
+Katman: encoder_layer.norm2.weight | Boyut: torch.Size([16])
+Ortalama: 0.943752
+İlk 5 Değer: [0.893907, 0.939043, 0.95519, 0.726157, 1.018958]
+
+Katman: encoder_layer.norm2.bias | Boyut: torch.Size([16])
+Ortalama: 0.000829
+İlk 5 Değer: [-0.085236, 0.026493, 0.024596, 0.054265, -0.043803]
+
+Katman: decoder_layer.self_attn.in_proj_weight | Boyut: torch.Size([48, 16])
+Ortalama: -0.003401
+İlk 5 Değer: [0.303889, -0.157034, -0.090607, -0.067313, -0.263157]
+
+Katman: decoder_layer.self_attn.in_proj_bias | Boyut: torch.Size([48])
+Ortalama: 0.004246
+İlk 5 Değer: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+Katman: decoder_layer.self_attn.out_proj.weight | Boyut: torch.Size([16, 16])
+Ortalama: -0.005096
+İlk 5 Değer: [-0.112082, -0.168738, -0.143212, 0.052788, -0.094326]
+
+Katman: decoder_layer.self_attn.out_proj.bias | Boyut: torch.Size([16])
+Ortalama: -0.000348
+İlk 5 Değer: [0.001415, -0.000221, 0.000314, -0.000166, -0.003811]
+
+Katman: decoder_layer.multihead_attn.in_proj_weight | Boyut: torch.Size([48, 16])
+Ortalama: -0.004965
+İlk 5 Değer: [0.156925, 0.228612, 0.292979, 0.384665, 0.232479]
+
+Katman: decoder_layer.multihead_attn.in_proj_bias | Boyut: torch.Size([48])
+Ortalama: 0.005988
+İlk 5 Değer: [0.005947, -0.005292, -0.010447, -0.004854, 0.033607]
+
+Katman: decoder_layer.multihead_attn.out_proj.weight | Boyut: torch.Size([16, 16])
+Ortalama: -0.002773
+İlk 5 Değer: [-0.10255, 0.109052, 0.287052, 0.278902, 0.055912]
+
+Katman: decoder_layer.multihead_attn.out_proj.bias | Boyut: torch.Size([16])
+Ortalama: 0.001463
+İlk 5 Değer: [0.039201, 0.003349, -0.013889, -0.00747, -0.076718]
+
+Katman: decoder_layer.linear1.weight | Boyut: torch.Size([2048, 16])
+Ortalama: -0.000955
+İlk 5 Değer: [0.17944, 0.033756, 0.177954, -0.207026, 0.002049]
+
+Katman: decoder_layer.linear1.bias | Boyut: torch.Size([2048])
+Ortalama: -0.046805
+İlk 5 Değer: [0.079999, -0.094243, 0.130919, -0.262895, -0.113365]
+
+Katman: decoder_layer.linear2.weight | Boyut: torch.Size([16, 2048])
+Ortalama: 0.004895
+İlk 5 Değer: [0.011898, -0.00223, -0.019165, 0.017305, -0.132765]
+
+Katman: decoder_layer.linear2.bias | Boyut: torch.Size([16])
+Ortalama: 0.000778
+İlk 5 Değer: [-0.089129, -0.07307, -0.094142, -0.22975, 0.095341]
+
+Katman: decoder_layer.norm1.weight | Boyut: torch.Size([16])
+Ortalama: 1.025853
+İlk 5 Değer: [0.936918, 1.229645, 1.032076, 1.081028, 0.88594]
+
+Katman: decoder_layer.norm1.bias | Boyut: torch.Size([16])
+Ortalama: 0.006555
+İlk 5 Değer: [0.00469, 0.020733, 0.002148, -0.045471, -0.073972]
+
+Katman: decoder_layer.norm2.weight | Boyut: torch.Size([16])
+Ortalama: 1.007322
+İlk 5 Değer: [0.951376, 1.042873, 1.025868, 1.030365, 0.954434]
+
+Katman: decoder_layer.norm2.bias | Boyut: torch.Size([16])
+Ortalama: 0.008470
+İlk 5 Değer: [0.019799, 0.070802, 0.002627, -0.042227, -0.058575]
+
+Katman: decoder_layer.norm3.weight | Boyut: torch.Size([16])
+Ortalama: 1.074932
+İlk 5 Değer: [1.17133, 1.224045, 0.958799, 0.945185, 1.295763]
+
+Katman: decoder_layer.norm3.bias | Boyut: torch.Size([16])
+Ortalama: -0.006271
+İlk 5 Değer: [0.110593, 0.109368, -0.084538, -0.080891, -0.107306]
+
+=======================================================
+3. HEAD (Sonuç/Tahmin Üretimi: Doğrusal Katman)
+=======================================================
+
+Katman: final_linear_layer.weight | Boyut: torch.Size([1, 16])
+Ortalama: -0.004203
+İlk 5 Değer: [0.267281, 0.38173, -0.04336, -0.049837, -0.478183]
+
+Katman: final_linear_layer.bias | Boyut: torch.Size([1])
+Ortalama: 0.237372
+İlk 5 Değer: [0.237372]
+
+-------------------------------------------------------
+Eğitilmiş Modelin Toplam Parametre Sayısı: 142,097

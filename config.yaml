@@ -1,17 +1,27 @@
 # Configuration file in YAML format
 
 # Dataset settings
+# NUM_CYCLES: geçmiş veri uzunluğu (NARX döngü sayısı) kullanılarak modelin geçmişten aldığı adım sayısı
 NUM_CYCLES: 7
+# NUM_PREDS: kaç adım ileri tahmin yapılacağı
 NUM_PREDS: 7
+# FEATURE_DIM1: birinci özellik gömme/projeksiyon boyutu (örneğin encoder girdi boyutu)
 FEATURE_DIM1: 16
+# FEATURE_DIM2: ikinci özellik gömme/projeksiyon boyutu (örneğin decoder girdi boyutu)
 FEATURE_DIM2: 16
+# NUM_ATTENTION: multi-head attention başlık sayısı
 NUM_ATTENTION: 16
 
 # Training settings
+# EPOCHS: modelin toplam eğitim döngü sayısı
 EPOCHS: 1000
+# LEARNING_RATE: ağırlık güncelleme adım büyüklüğü
 LEARNING_RATE: 0.001
 
 # Other settings
+# BATCH_SIZE: her adımda kullanılacak örnek sayısı
 BATCH_SIZE: 32
+# USE_GPU: True ise GPU, False ise CPU
 USE_GPU: True
+# FEATURE_DIM: girişteki temel özellik sayısı (veri seti boyutu)
 FEATURE_DIM: 4

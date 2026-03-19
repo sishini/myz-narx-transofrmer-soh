@@ -124,3 +124,78 @@ class GRU_CNN(nn.Module):
         output = self.concat(combined)
 
         return output
+    
+
+
+
+
+# import yaml
+# 
+# # YAML configuration dosyasını yükle
+# with open('config.yaml', 'r') as file:
+#     cfg = yaml.safe_load(file)
+# 
+# # Modelinizi config parametreleriyle başlatın
+# custom_model = NARX_Transformer(
+#     feature_dim1=cfg['FEATURE_DIM1'],
+#     feature_dim2=cfg['FEATURE_DIM2'],
+#     num_attention=cfg['NUM_ATTENTION'],
+#     num_cycles=cfg['NUM_CYCLES'],
+#     num_preds=cfg['NUM_PREDS']
+# )
+# 
+# with open("model_ozeti.txt", "w", encoding="utf-8") as f:
+#     f.write("Modelinizin Katmanları ve Ağırlıkları:\n\n")
+#     # Modelin tüm öğrenilebilir parametrelerini (ağırlıklar ve bias'lar) yazdırma
+#     for name, param in custom_model.named_parameters():
+#         if param.requires_grad:
+#             f.write(f"Katman Adı: {name}, Ağırlık Boyutu: {param.data.shape}\n")
+#             # İsterseniz ağırlıkların ilk 5 değerini de yazdırabilirsiniz:
+#             # f.write(f"İlk 5 ağırlık değeri: {param.data.flatten()[:5]}\n\n")
+# 
+#     f.write("\nModelin toplam parametre sayısı:\n")
+#     total_params = sum(p.numel() for p in custom_model.parameters() if p.requires_grad)
+#     f.write(f"{total_params:,}\n")
+# 
+# print("Model bilgileri 'model_ozeti.txt' dosyasına başarıyla kaydedildi.")
+import torch
+
+# HATA 1: Windows yollarında ters slash (\) kullanırken Python'un hata vermemesi için
+# ya yolun başına r harfi koymalısınız (raw string), ya da / kullanmalısınız.
+# HATA 2: Yukarıdaki hatalı NARX_Transformer.IMAGENET1K_V1 kodunu hala silmemişsiniz,
+# bu yüzden o hatalı yeri silerek temizledim.
+
+# raw string ile tanımladığımız model yolu (başına r eklendi):
+model_yolu = r'C:\Users\TR\Desktop\myz dönem projesi\NARX-Transformer-SoH-main\models\trained_model_0.017068_763.pt'
+
+# Modeli doğrudan yükleyin ve değerlendirme moduna alın
+# (PyTorch'un son sürümlerinde tam modeli yüklerken weights_only=False eklemek gerekir)
+model = torch.load(model_yolu, weights_only=False)
+model.eval()
+
+print("Model başarıyla yüklendi!")
+
+# Model mimarisini ayrı bir dosyaya kaydet
+mimari_dosyasi = "egitilmis_mimari_ozeti.txt"
+with open(mimari_dosyasi, "w", encoding="utf-8") as f:
+    f.write("--- EĞİTİLMİŞ MODELİN MİMARİSİ ---\n\n")
+    f.write(str(model))
+
+print(f"Model mimarisi '{mimari_dosyasi}' dosyasına kaydedildi.")
+# Eğitilmiş modelin ağırlık isimlerini, ortalamasını ve ilk 5 değerini dosyaya yazdır
+dosya_adi = "egitilmis_model_ozeti.txt"
+with open(dosya_adi, "w", encoding="utf-8") as f:
+    f.write("--- EĞİTİLMİŞ MODELİN AĞIRLIKLARI (ÖZET) ---\n")
+    for name, param in model.named_parameters():
+        flat_weights = param.data.flatten()
+        mean_val = flat_weights.mean().item()
+        ilk_5 = flat_weights[:5].tolist()
+        
+        f.write(f"\nKatman: {name} | Boyut: {param.data.shape}\n")
+        f.write(f"Ortalama: {mean_val:.6f}\n")
+        f.write(f"İlk 5 Değer: {[round(x, 6) for x in ilk_5]}\n")
+
+    total_params_trained = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    f.write(f"\nEğitilmiş Modelin Toplam Parametre Sayısı: {total_params_trained:,}\n")
+
+print(f"Eğitilmiş modelin ağırlık detayları '{dosya_adi}' dosyasına kaydedildi.")
